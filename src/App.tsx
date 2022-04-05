@@ -1,26 +1,74 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React , {Component} from "react";
+import Post from "./components/Post";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+/*const posts = [
+    {
+        userId: 1,
+        id: 1,
+        title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+        body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto",
+    },
+    {
+        userId: 1,
+        id: 2,
+        title: "qui est esse",
+        body: "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla",
+    },
+    {
+        userId: 1,
+        id: 3,
+        title: "ea molestias quasi exercitationem repellat qui ipsa sit aut",
+        body: "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut",
+    },
+    {
+        userId: 1,
+        id: 4,
+        title: "eum et est occaecati",
+        body: "ullam et saepe reiciendis voluptatem adipisci\nsit amet autem assumenda provident rerum culpa\nquis hic commodi nesciunt rem tenetur doloremque ipsam iure\nquis sunt voluptatem rerum illo velit",
+    },
+    {
+        userId: 1,
+        id: 5,
+        title: "nesciunt quas odio",
+        body: "repudiandae veniam quaerat sunt sed\nalias aut fugiat sit autem sed est\nvoluptatem omnis possimus esse voluptatibus quis\nest aut tenetur dolor neque",
+    },
+]; */
+
+
+
+class App extends Component{
+  state = {
+      posts:[]
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(json => {
+        this.setState({posts: json});
+      });
+  }
+
+  render(){
+    const postsList = this.state.posts.map((post) => {
+      return <Post key={post['id']}  post={post} />;
+    });
+
+    return (
+      <div className="App">
+          <header className="App-header">
+              <h1>Blog Beaty</h1>
+          </header>
+          <div>
+              <ul className="post-list">{postsList}</ul>
+          </div>
+      </div>
   );
+  }
+  
 }
 
 export default App;
