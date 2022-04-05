@@ -17,7 +17,6 @@ const Post: React.ComponentType<PostProps>  = ({ post }) => {
             <h3>
                 <b>{post.title}</b>
             </h3>
-            
             <br />
             {post.body}
         </li>
