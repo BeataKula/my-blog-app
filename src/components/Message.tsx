@@ -30,13 +30,14 @@ type MessageProps = {
 }
 
 const Message: ComponentType <MessageProps>  = ({ showMessage, category, headerText, text, color, size }) => {
-  const [visibility, setVisibility] = useState("");
+  const [visibility, setVisibility] = useState("hidden");
   const [messageClass, setMessageClass] = useState("");
 
   useEffect(() => {
-    setVisibility(showMessage ? " visible " : " hidden ");
-    setMessageClass(`ui ${category} ${color} ${visibility} message`);
-  }, []); 
+    const newVisibility = showMessage ? " visible " : " hidden ";
+    setVisibility(newVisibility);
+    setMessageClass(`ui ${category} ${color} ${newVisibility} message`);
+  }, [showMessage, category, color]); 
 
   const onCloseIconClick = () => {
     setVisibility("hidden");

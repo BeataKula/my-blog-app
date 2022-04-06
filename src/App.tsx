@@ -1,11 +1,23 @@
 import React , {Component} from "react";
 import Post from "./components/Post";
 import Loader from "./components/Loader";
-import Message from "./components/Message";
+import Message, { categoryTypeString }from "./components/Message";
 
 import "./App.css";
 
-class App extends Component{
+type appStateType = {
+  posts: Array<typeof Post>,
+  isloaded: boolean,
+  isError: boolean,
+  headerMessageText: String,
+  messageText: String,
+  showMessage: boolean,
+  categoryMessage: categoryTypeString
+}
+
+class App extends Component <{}, appStateType> {
+  categoryMessageInfo: categoryTypeString = "info";
+
   state = {
       posts:[],
       isloaded: false,
@@ -13,8 +25,7 @@ class App extends Component{
       headerMessageText: "",
       messageText: "",
       showMessage: false,
-      //Prawdopodobnie tu mu musze jakoś wskazać, że to jest typu sizeTypeString
-      categoryMessage: "info"
+      categoryMessage: this.categoryMessageInfo
   }
 
   componentDidMount() {
@@ -59,9 +70,8 @@ class App extends Component{
           <div>
               <Loader isActive={!this.state.isloaded}/>
               <Message
-                showMessage={this.state.showMessage} 
-                //TODO zmienić na  category={this.state.categoryMessage} - nie działa nie wiem czemu ?????
-                category="negative"
+                showMessage={this.state.showMessage}
+                category={this.state.categoryMessage}
                 headerText={this.state.headerMessageText}
                 text={this.state.messageText}
                 color="red"
