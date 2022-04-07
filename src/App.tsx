@@ -6,6 +6,8 @@ import Message, { categoryType } from "./components/Message";
 
 import { Wrapper, Title } from "./components/AppStyles";
 
+/* Tylko dla PR - tmp */
+
 import "./App.css";
 
 export type PostType = {

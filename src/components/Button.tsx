@@ -30,3 +30,4 @@ const Button: ComponentType<ButtonType> = ({ id, name, about, onClick }) => {
 };
 
 export default Button;
+//Tylko dla PR - tmp

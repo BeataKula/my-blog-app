@@ -32,6 +32,7 @@ const Message: ComponentType<MessageProps> = ({
         setVisibility("hidden");
         setMessageClass(`ui ${category} ${color} ${visibility} message`);
     };
+    //Do kasacji
 
     return (
         <div className={messageClass}>
@@ -43,3 +44,4 @@ const Message: ComponentType<MessageProps> = ({
 };
 
 export default Message;
+//Tylko dla PR - tmp
