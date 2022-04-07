@@ -1,23 +1,31 @@
 import React, { Component } from "react";
 import Post from "./components/Post";
 import Loader from "./components/Loader";
-import Message, { categoryTypeString } from "./components/Message";
+import LeftPanel from "./components/LeftPanel";
+import Message, { categoryType } from "./components/Message";
+
+import { Wrapper, Title } from "./components/AppStyles";
 
 import "./App.css";
 
+export type PostType = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+};
+
 type appStateType = {
-    posts: Array<typeof Post>;
+    posts: PostType[];
     isloaded: boolean;
     isError: boolean;
     headerMessageText: String;
     messageText: String;
     showMessage: boolean;
-    categoryMessage: categoryTypeString;
+    categoryMessage: categoryType;
 };
 
 class App extends Component<{}, appStateType> {
-    categoryMessageInfo: categoryTypeString = "info";
-
     state = {
         posts: [],
         isloaded: false,
@@ -25,7 +33,7 @@ class App extends Component<{}, appStateType> {
         headerMessageText: "",
         messageText: "",
         showMessage: false,
-        categoryMessage: this.categoryMessageInfo,
+        categoryMessage: "info" as categoryType,
     };
 
     componentDidMount() {
@@ -64,23 +72,29 @@ class App extends Component<{}, appStateType> {
         });
 
         return (
-            <div className="App">
-                <header className="App-header">
-                    <h1>Blog Beaty</h1>
+            <>
+                <header>
+                    <Title>
+                        <h1>Blog Beaty</h1>
+                    </Title>
                 </header>
-                <div>
-                    <Loader isActive={!this.state.isloaded} />
-                    <Message
-                        showMessage={this.state.showMessage}
-                        category={this.state.categoryMessage}
-                        headerText={this.state.headerMessageText}
-                        text={this.state.messageText}
-                        color="red"
-                        size="large"
-                    />
-                    <ul className="post-list">{postsList}</ul>
-                </div>
-            </div>
+
+                <Wrapper>
+                    <LeftPanel></LeftPanel>
+                    <div>
+                        <Loader isActive={!this.state.isloaded} />
+                        <Message
+                            showMessage={this.state.showMessage}
+                            category={this.state.categoryMessage}
+                            headerText={this.state.headerMessageText}
+                            text={this.state.messageText}
+                            color="red"
+                            size="large"
+                        />
+                        <ul className="post-list">{postsList}</ul>
+                    </div>
+                </Wrapper>
+            </>
         );
     }
 }
