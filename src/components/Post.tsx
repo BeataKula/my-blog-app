@@ -6,6 +6,10 @@ import Button from "./Button";
 
 type PostProps = PostType;
 
+const addComment = () => {
+    alert("Dodawanie komenarzy już wkrótce!");
+};
+
 const PostElementStyle = styled.section`
     margin: 10px;
     padding: 0px;
@@ -40,6 +44,7 @@ const Post: React.ComponentType<PostProps> = ({ id, userId, title, body }) => {
                         id={buttonId}
                         about="commentPrimary"
                         name="Dodaj komentarz"
+                        onClick={addComment}
                     />
                 </PostElementFooterStyle>
             </PostElementStyle>

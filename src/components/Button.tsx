@@ -18,11 +18,12 @@ type ButtonType = {
     id: string;
     name: string;
     about: "commentPrimary" | "commentHover";
+    onClick: () => void;
 };
 
-const Button: ComponentType<ButtonType> = ({ id, name, about }) => {
+const Button: ComponentType<ButtonType> = ({ id, name, about, onClick }) => {
     return (
-        <ButtonStyle about={about} id={id}>
+        <ButtonStyle about={about} id={id} onClick={onClick}>
             {name}
         </ButtonStyle>
     );
