@@ -53,4 +53,3 @@ class LeftPanel extends Component<Props, State> {
 }
 
 export default LeftPanel;
-//Tylko dla PR - tmp

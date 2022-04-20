@@ -44,4 +44,3 @@ const Message: FunctionComponent<MessageProps> = ({
 };
 
 export default Message;
-//Tylko dla PR - tmp

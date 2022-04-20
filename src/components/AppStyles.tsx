@@ -16,5 +16,3 @@ export const Wrapper = styled.section`
     background: #f5f5f5;
     text-align: left;
 `;
-
-//Tylko dla PR - tmp

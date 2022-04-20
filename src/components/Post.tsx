@@ -58,4 +58,3 @@ const Post: React.FunctionComponent<PostProps> = ({
 };
 
 export default Post;
-//Tylko dla PR - tmp

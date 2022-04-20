@@ -13,4 +13,3 @@ const Link: FunctionComponent<LinkProps> = ({ href, className, children }) => (
 );
 
 export default Link;
-//Tylko dla PR - tmp

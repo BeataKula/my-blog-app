@@ -35,4 +35,3 @@ const Button: FunctionComponent<ButtonType> = ({
 };
 
 export default Button;
-//Tylko dla PR - tmp
