@@ -17,7 +17,7 @@ export type PostType = {
     body: string;
 };
 
-type appStateType = {
+type AppState = {
     posts: PostType[];
     isloaded: boolean;
     isError: boolean;
@@ -27,7 +27,7 @@ type appStateType = {
     categoryMessage: categoryType;
 };
 
-class App extends Component<{}, appStateType> {
+class App extends Component<{}, AppState> {
     state = {
         posts: [],
         isloaded: false,
@@ -76,9 +76,7 @@ class App extends Component<{}, appStateType> {
         return (
             <>
                 <header>
-                    <Title>
-                        <h1>Blog Beaty</h1>
-                    </Title>
+                    <Title>Blog Beaty</Title>
                 </header>
 
                 <Wrapper>

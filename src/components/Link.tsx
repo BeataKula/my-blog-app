@@ -1,12 +1,12 @@
-import React, { ComponentType } from "react";
+import React, { FunctionComponent } from "react";
 
-type LinkType = {
+type LinkProps = {
     href: string;
     className: string;
     children: string;
 };
 
-const Link: ComponentType<LinkType> = ({ href, className, children }) => (
+const Link: FunctionComponent<LinkProps> = ({ href, className, children }) => (
     <a href={href} className={className}>
         {children}
     </a>

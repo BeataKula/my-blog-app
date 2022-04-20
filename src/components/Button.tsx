@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
 
 const ButtonStyle = styled.button`
@@ -21,7 +21,12 @@ type ButtonType = {
     onClick: () => void;
 };
 
-const Button: ComponentType<ButtonType> = ({ id, name, about, onClick }) => {
+const Button: FunctionComponent<ButtonType> = ({
+    id,
+    name,
+    about,
+    onClick,
+}) => {
     return (
         <ButtonStyle about={about} id={id} onClick={onClick}>
             {name}

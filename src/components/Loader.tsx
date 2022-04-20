@@ -1,10 +1,10 @@
-import React, { ComponentType } from "react";
+import React, { FunctionComponent } from "react";
 
 type LoaderProps = {
     isActive: boolean;
 };
 
-const Loader: ComponentType<LoaderProps> = ({ isActive }) => {
+const Loader: FunctionComponent<LoaderProps> = ({ isActive }) => {
     const isActiveFlag = isActive ? " active " : "";
     const activeDimmerClass = "ui" + isActiveFlag + "inverted dimmer";
 

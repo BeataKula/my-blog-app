@@ -1,4 +1,4 @@
-import React, { ComponentType, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 
 export type categoryType = "info" | "positive" | "negative" | "warning";
 
@@ -11,7 +11,7 @@ type MessageProps = {
     size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
 };
 
-const Message: ComponentType<MessageProps> = ({
+const Message: FunctionComponent<MessageProps> = ({
     showMessage,
     category,
     headerText,

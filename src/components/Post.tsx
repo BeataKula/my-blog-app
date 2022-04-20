@@ -29,7 +29,12 @@ const PostElementFooterStyle = styled.section`
     min-height: 10vh;
 `;
 
-const Post: React.ComponentType<PostProps> = ({ id, userId, title, body }) => {
+const Post: React.FunctionComponent<PostProps> = ({
+    id,
+    userId,
+    title,
+    body,
+}) => {
     const buttonId = "button-" + id.toString();
     return (
         <li>
