@@ -1,7 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { PostType } from "../pages/PostsListPage";
 import Button from "./Button";
+
+export type PostType = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+};
 
 type PostProps = PostType;
 

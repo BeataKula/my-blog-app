@@ -20,7 +20,7 @@ type PostsListPageState = {
     categoryMessage: categoryType;
 };
 
-class PostsListPage extends Component<{}, PostsListPageState> {
+class PostsListPage2 extends Component<{}, PostsListPageState> {
     state = {
         posts: [],
         isloaded: false,
@@ -83,4 +83,4 @@ class PostsListPage extends Component<{}, PostsListPageState> {
     }
 }
 
-export default PostsListPage;
+export default PostsListPage2;
