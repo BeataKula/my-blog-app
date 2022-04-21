@@ -1,7 +1,6 @@
-import { stringify } from "querystring";
 import React from "react";
 import styled from "styled-components";
-import { PostType } from "../App";
+import { PostType } from "../pages/PostsListPage";
 import Button from "./Button";
 
 type PostProps = PostType;

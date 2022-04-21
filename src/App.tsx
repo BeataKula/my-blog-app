@@ -1,100 +1,57 @@
-import React, { Component } from "react";
-import Post from "./components/Post";
-import Loader from "./components/Loader";
-import LeftPanel from "./components/LeftPanel";
-import Message, { categoryType } from "./components/Message";
-
+import { Component } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Wrapper, Title } from "./components/AppStyles";
-
 import "./App.css";
 
-export type PostType = {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-};
+import AboutMePage from "./pages/AboutMePage";
+import WelcomePage from "./pages/WelcomePage";
+import ContactPage from "./pages/ContactPage";
+import PostsListPage from "./pages/PostsListPage";
+import LeftPanel from "./pages/LeftPanel";
+import NoPage from "./pages/NoPage";
 
 type AppState = {
-    posts: PostType[];
-    isloaded: boolean;
-    isError: boolean;
-    headerMessageText: String;
-    messageText: String;
-    showMessage: boolean;
-    categoryMessage: categoryType;
+    isActive: boolean;
 };
 
 class App extends Component<{}, AppState> {
     state = {
-        posts: [],
-        isloaded: false,
-        isError: false,
-        headerMessageText: "",
-        messageText: "",
-        showMessage: false,
-        categoryMessage: "info" as categoryType,
+        isActive: true,
     };
 
-    componentDidMount() {
-        fetch("https://jsonplaceholder.typicode.com/posts")
-            .then((response) => {
-                if (response.status === 200) {
-                    return response.json();
-                } else {
-                    this.setState({
-                        posts: [],
-                        isloaded: false,
-                        isError: true,
-                        headerMessageText:
-                            "We're sorry we can't show you Blog!",
-                        messageText:
-                            "An error occurred while loading data: <br/>" +
-                            response.text,
-                        showMessage: true,
-                        categoryMessage: "negative",
-                    });
-
-                    return [];
-                }
-            })
-            .then((json) => {
-                this.setState({
-                    posts: json,
-                    isloaded: true,
-                });
-            });
-    }
-
     render() {
-        const postsList = this.state.posts.map((post) => {
-            return <Post key={post["id"]} {...post} />;
-        });
-
+        const isActive = this.state.isActive;
         return (
             <>
                 <header>
                     <Title>Blog Beaty</Title>
                 </header>
-
                 <Wrapper>
-                    <LeftPanel></LeftPanel>
-                    <div>
-                        <Loader isActive={!this.state.isloaded} />
-                        <Message
-                            showMessage={this.state.showMessage}
-                            category={this.state.categoryMessage}
-                            headerText={this.state.headerMessageText}
-                            text={this.state.messageText}
-                            color="red"
-                            size="large"
-                        />
-                        <ul className="post-list">{postsList}</ul>
-                    </div>
+                    <BrowserRouter>
+                        <LeftPanel />
+                        <Routes>
+                            <Route
+                                path="/Welcome"
+                                element={<WelcomePage isActive={isActive} />}
+                            />
+                            <Route
+                                path="/AboutMe"
+                                element={<AboutMePage isActive={isActive} />}
+                            />
+                            <Route path="/Blog" element={<PostsListPage />} />
+                            <Route
+                                path="/Contact"
+                                element={<ContactPage isActive={isActive} />}
+                            />
+                            <Route
+                                path="*"
+                                element={<NoPage isActive={isActive} />}
+                            />
+                        </Routes>
+                    </BrowserRouter>
                 </Wrapper>
             </>
         );
     }
 }
-
 export default App;
