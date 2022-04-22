@@ -17,6 +17,11 @@ export type LinkProps = {
     children: string;
 };
 
+export type LinkPropsWithoutClassName = {
+    to: string;
+    children: string;
+};
+
 export type categoryType = "info" | "positive" | "negative" | "warning";
 
 export type MessageProps = {

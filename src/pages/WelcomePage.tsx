@@ -1,12 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-type WelcomeProps = {
-    isActive: boolean;
-};
-
-const WelcomePage: FunctionComponent<WelcomeProps> = ({ isActive }) => {
-    const isActiveFlag = isActive ? " active " : "";
-
+const WelcomePage: FunctionComponent = () => {
     return <div>Welcome!</div>;
 };
 

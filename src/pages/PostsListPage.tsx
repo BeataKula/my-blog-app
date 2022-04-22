@@ -1,8 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
+import styled from "styled-components";
 import { fetchPosts } from "../actions";
 import { IPost, PostsListPageType } from "../AppTypes";
 import Post from "../components/Post";
+
+export const PostsListStyle = styled.ul`
+    padding: 15px;
+    padding-top: 0px;
+    list-style-type: none;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 10px;
+`;
 
 class PostsListPage extends React.Component<PostsListPageType> {
     componentDidMount() {
@@ -16,7 +27,7 @@ class PostsListPage extends React.Component<PostsListPageType> {
 
         return (
             <>
-                <ul className="post-list">{ListOfPosts}</ul>
+                <PostsListStyle>{ListOfPosts}</PostsListStyle>
             </>
         );
     }

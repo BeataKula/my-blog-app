@@ -34,6 +34,20 @@ const PostElementFooterStyle = styled.section`
     min-height: 10vh;
 `;
 
+export const PostAuthor = styled.h3`
+    text-align: left;
+    padding: 5px;
+`;
+
+export const PostTitle = styled.h4`
+    text-align: left;
+    padding: 5px;
+    margin: 0px;
+    background-color: #dcedc8;
+    padding: 5px;
+    font-weight: bold;
+`;
+
 const Post: React.FunctionComponent<PostProps> = ({
     id,
     userId,
@@ -44,10 +58,10 @@ const Post: React.FunctionComponent<PostProps> = ({
     return (
         <li>
             <PostElementStyle>
-                <h4>Autor: {userId}</h4>
-                <h3>
+                <PostAuthor> Autor: {userId}</PostAuthor>
+                <PostTitle>
                     <b>{title}</b>
-                </h3>
+                </PostTitle>
                 <PostElementContentStyle>{body}</PostElementContentStyle>
                 <PostElementFooterStyle>
                     <Button

@@ -14,11 +14,15 @@ export const LeftPanelStyle = styled.div`
     margin-left: 0px;
 `;
 
+export const LeftPanelUlStyle = styled.div`
+    list-style: none;
+`;
+
 const LeftPanel = () => {
     return (
         <LeftPanelStyle>
             <nav className="menu-nav">
-                <ul className="menu-ul">
+                <LeftPanelUlStyle>
                     <li>
                         <StyledLink to="/Welcome" className="menu-link">
                             Welcome
@@ -39,7 +43,7 @@ const LeftPanel = () => {
                             Contact
                         </StyledLink>
                     </li>
-                </ul>
+                </LeftPanelUlStyle>
             </nav>
             <Outlet />
         </LeftPanelStyle>

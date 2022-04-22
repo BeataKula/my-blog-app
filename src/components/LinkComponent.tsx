@@ -20,6 +20,10 @@ const StyledLink = styled(LinkComponent)`
     border: 1px solid #616161;
     margin: 5px;
     text-decoration: none;
+    padding-left: 10px;
+    :hover {
+        color: #c5e1a5;
+        font-weight: bold;
+    }
 `;
-
 export default StyledLink;

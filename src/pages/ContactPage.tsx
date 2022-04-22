@@ -1,12 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-type ContactProps = {
-    isActive: boolean;
-};
-
-const ContactPage: FunctionComponent<ContactProps> = ({ isActive }) => {
-    const isActiveFlag = isActive ? " active " : "";
-
+const ContactPage: FunctionComponent = () => {
     return <div>Contakt me now!</div>;
 };
 
