@@ -1,15 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
-
-export type categoryType = "info" | "positive" | "negative" | "warning";
-
-type MessageProps = {
-    showMessage: boolean;
-    category: categoryType;
-    headerText: String;
-    text: String;
-    color: String;
-    size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
-};
+import { MessageProps } from "../AppTypes";
 
 const Message: FunctionComponent<MessageProps> = ({
     showMessage,

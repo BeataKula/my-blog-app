@@ -1,24 +1,8 @@
 import React, { Component } from "react";
+import { categoryType, PostsListPageState } from "../AppTypes";
 import Loader from "../components/Loader";
-import Message, { categoryType } from "../components/Message";
+import Message from "../components/Message";
 import Post from "../components/Post";
-
-export type PostType = {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-};
-
-type PostsListPageState = {
-    posts: PostType[];
-    isloaded: boolean;
-    isError: boolean;
-    headerMessageText: String;
-    messageText: String;
-    showMessage: boolean;
-    categoryMessage: categoryType;
-};
 
 class PostsListPage2 extends Component<{}, PostsListPageState> {
     state = {

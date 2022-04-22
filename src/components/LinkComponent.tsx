@@ -1,12 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-type LinkProps = {
-    to: string;
-    className: string;
-    children: string;
-};
+import { LinkProps } from "../AppTypes";
 
 const LinkComponent: FunctionComponent<LinkProps> = ({
     to,

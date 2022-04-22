@@ -1,15 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions";
+import { IPost, PostsListPageType } from "../AppTypes";
 import Post from "../components/Post";
 
-class PostsListPage extends React.Component {
+class PostsListPage extends React.Component<PostsListPageType> {
     componentDidMount() {
         this.props.fetchPosts();
     }
 
     renderList() {
-        const ListOfPosts = this.props.posts.map((post) => {
+        const ListOfPosts = this.props.posts.map((post: IPost) => {
             return <Post key={post["id"]} {...post} />;
         });
 
@@ -27,7 +28,7 @@ class PostsListPage extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: { posts: IPost[] }) => {
     return { posts: state.posts };
 };
 
