@@ -35,7 +35,10 @@ export type MessageProps = {
 
 export interface PostsListPageType {
     fetchPosts: FetchPostType;
-    posts: IPost[];
+    postsReducer: {
+        posts: IPost[];
+        status: number;
+    }
 }
 
 export interface IPost {
@@ -50,12 +53,14 @@ export type PostType = {
 };
 
 export type PostState = {
-    posts: IPost[];
-};
+    posts: IPost[],
+    status: number
+} 
 
 export type PostAction = {
     type: string;
-    payload: IPost[];
+    //payload: IPost[];
+    payload: PostState;
 };
 
 export type DispatchType = (args: PostAction) => PostAction;
