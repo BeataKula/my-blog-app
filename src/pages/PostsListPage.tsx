@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+
 import { fetchPosts } from "../actions";
 import { PostState, IPost, PostsListPageType } from "../AppTypes";
 import Post from "../components/Post";
+import Loader from "../components/Loader";
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -16,8 +18,20 @@ export const PostsListStyle = styled.ul`
 `;
 
 class PostsListPage extends React.Component<PostsListPageType> {
+    state = {
+        isloaded: false,
+    };
+
     componentDidMount() {
         this.props.fetchPosts();
+    }
+
+    componentDidUpdate() {
+        if (this.props.postsReducer.status === 200 && !this.state.isloaded) {
+            this.setState({
+                isloaded: true,
+            });
+        }
     }
 
     renderList() {
@@ -38,7 +52,12 @@ class PostsListPage extends React.Component<PostsListPageType> {
 
     render() {
         return (
-            <div className="ui relaxed divided list">{this.renderList()}</div>
+            <>
+                <Loader isActive={!this.state.isloaded} />
+                <div className="ui relaxed divided list">
+                    {this.renderList()}
+                </div>
+            </>
         );
     }
 }
