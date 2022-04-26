@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { fetchPosts } from "../actions";
-import { IPost, PostsListPageType } from "../AppTypes";
+import { PostState, IPost, PostsListPageType } from "../AppTypes";
 import Post from "../components/Post";
 
 export const PostsListStyle = styled.ul`
@@ -21,7 +21,11 @@ class PostsListPage extends React.Component<PostsListPageType> {
     }
 
     renderList() {
-        const ListOfPosts = this.props.posts.map((post: IPost) => {
+        if (!this.props.postsReducer.posts) {
+            return <></>;
+        }
+
+        const ListOfPosts = this.props.postsReducer.posts.map((post: IPost) => {
             return <Post key={post["id"]} {...post} />;
         });
 
@@ -39,8 +43,8 @@ class PostsListPage extends React.Component<PostsListPageType> {
     }
 }
 
-const mapStateToProps = (state: { posts: IPost[] }) => {
-    return { posts: state.posts };
+const mapStateToProps = (state: { postsReducer: PostState }) => {
+    return state;
 };
 
 export default connect(mapStateToProps, { fetchPosts })(PostsListPage);
