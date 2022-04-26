@@ -9,11 +9,8 @@ export const fetchPosts: any = () => async (dispatch: DispatchType) => {
         posts: data,
         status: response.status,
     };
-    console.log("fetchPosts: ");
-    console.log(payload);
     const action: PostAction = {
         type: FETCH_POSTS,
-        //payload: data,
         payload: payload,
     };
 

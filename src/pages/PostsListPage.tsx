@@ -17,16 +17,13 @@ export const PostsListStyle = styled.ul`
 
 class PostsListPage extends React.Component<PostsListPageType> {
     componentDidMount() {
-        console.log("________________ componentDidMount __________________");
         this.props.fetchPosts();
-        console.log(this.props);
-        console.log("________________ componentDidMount END__________________");
     }
 
     renderList() {
-        console.log("________________ renderList __________________");
-        console.log(this.props.postsReducer);
-        console.log("________________ renderList END__________________");
+        if (!this.props.postsReducer.posts) {
+            return <></>;
+        }
 
         const ListOfPosts = this.props.postsReducer.posts.map((post: IPost) => {
             return <Post key={post["id"]} {...post} />;
@@ -40,21 +37,13 @@ class PostsListPage extends React.Component<PostsListPageType> {
     }
 
     render() {
-        //return null;
         return (
             <div className="ui relaxed divided list">{this.renderList()}</div>
         );
     }
 }
 
-//const mapStateToProps = (state: { posts: IPost[] }) => {
-//    return { posts: state.posts };
-//};
-
 const mapStateToProps = (state: { postsReducer: PostState }) => {
-    console.log("________________ mapStateToProps __________________");
-    console.log(state);
-    console.log("________________ mapStateToProps END__________________");
     return state;
 };
 
