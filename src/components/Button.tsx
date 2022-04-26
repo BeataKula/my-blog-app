@@ -1,5 +1,6 @@
-import React, { ComponentType } from "react";
+import React, { FunctionComponent } from "react";
 import styled from "styled-components";
+import { ButtonType } from "../AppTypes";
 
 const ButtonStyle = styled.button`
     background: ${(props) =>
@@ -14,14 +15,12 @@ const ButtonStyle = styled.button`
     border-radius: 5px;
 `;
 
-type ButtonType = {
-    id: string;
-    name: string;
-    about: "commentPrimary" | "commentHover";
-    onClick: () => void;
-};
-
-const Button: ComponentType<ButtonType> = ({ id, name, about, onClick }) => {
+const Button: FunctionComponent<ButtonType> = ({
+    id,
+    name,
+    about,
+    onClick,
+}) => {
     return (
         <ButtonStyle about={about} id={id} onClick={onClick}>
             {name}

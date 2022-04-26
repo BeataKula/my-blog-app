@@ -1,17 +1,7 @@
-import React, { ComponentType, useState, useEffect } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
+import { MessageProps } from "../AppTypes";
 
-export type categoryType = "info" | "positive" | "negative" | "warning";
-
-type MessageProps = {
-    showMessage: boolean;
-    category: categoryType;
-    headerText: String;
-    text: String;
-    color: String;
-    size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
-};
-
-const Message: ComponentType<MessageProps> = ({
+const Message: FunctionComponent<MessageProps> = ({
     showMessage,
     category,
     headerText,
@@ -32,6 +22,7 @@ const Message: ComponentType<MessageProps> = ({
         setVisibility("hidden");
         setMessageClass(`ui ${category} ${color} ${visibility} message`);
     };
+    //Do kasacji
 
     return (
         <div className={messageClass}>

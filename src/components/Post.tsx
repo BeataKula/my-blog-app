@@ -1,8 +1,13 @@
-import { stringify } from "querystring";
 import React from "react";
 import styled from "styled-components";
-import { PostType } from "../App";
 import Button from "./Button";
+
+export type PostType = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+};
 
 type PostProps = PostType;
 
@@ -29,15 +34,34 @@ const PostElementFooterStyle = styled.section`
     min-height: 10vh;
 `;
 
-const Post: React.ComponentType<PostProps> = ({ id, userId, title, body }) => {
+export const PostAuthor = styled.h3`
+    text-align: left;
+    padding: 5px;
+`;
+
+export const PostTitle = styled.h4`
+    text-align: left;
+    padding: 5px;
+    margin: 0px;
+    background-color: #dcedc8;
+    padding: 5px;
+    font-weight: bold;
+`;
+
+const Post: React.FunctionComponent<PostProps> = ({
+    id,
+    userId,
+    title,
+    body,
+}) => {
     const buttonId = "button-" + id.toString();
     return (
         <li>
             <PostElementStyle>
-                <h4>Autor: {userId}</h4>
-                <h3>
+                <PostAuthor> Autor: {userId}</PostAuthor>
+                <PostTitle>
                     <b>{title}</b>
-                </h3>
+                </PostTitle>
                 <PostElementContentStyle>{body}</PostElementContentStyle>
                 <PostElementFooterStyle>
                     <Button
