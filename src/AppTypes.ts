@@ -38,6 +38,8 @@ export interface PostsListPageType {
     postsReducer: {
         posts: IPost[];
         status: number;
+        text: string;
+        error: boolean,
     }
 }
 
@@ -54,7 +56,9 @@ export type PostType = {
 
 export type PostState = {
     posts: IPost[],
-    status: number
+    status: number,
+    text: string;
+    error: boolean,
 } 
 
 export type PostAction = {
@@ -66,7 +70,6 @@ export type DispatchType = (args: PostAction) => PostAction;
 export type FetchPostType = () => PostState;
 
 export type PostsListPageState = {
-    posts: IPost[];
     isloaded: boolean;
     isError: boolean;
     headerMessageText: String;

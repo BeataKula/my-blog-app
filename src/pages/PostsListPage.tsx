@@ -1,11 +1,13 @@
+/* eslint-disable eqeqeq */
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { fetchPosts } from "../actions";
-import { PostState, IPost, PostsListPageType } from "../AppTypes";
+import { PostState, IPost, PostsListPageType, categoryType } from "../AppTypes";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -20,6 +22,11 @@ export const PostsListStyle = styled.ul`
 class PostsListPage extends React.Component<PostsListPageType> {
     state = {
         isloaded: false,
+        isError: false,
+        headerMessageText: "",
+        messageText: "",
+        showMessage: false,
+        categoryMessage: "info" as categoryType,
     };
 
     componentDidMount() {
@@ -27,10 +34,28 @@ class PostsListPage extends React.Component<PostsListPageType> {
     }
 
     componentDidUpdate() {
-        if (this.props.postsReducer.status === 200 && !this.state.isloaded) {
+        console.log(this.props.postsReducer);
+
+        if (this.props.postsReducer.error === true && !this.state.isloaded) {
             this.setState({
                 isloaded: true,
+                isError: true,
+                headerMessageText: "We're sorry we can't show you Blog!",
+                messageText:
+                    "An error occurred while loading data: " +
+                    this.props.postsReducer.text,
+                showMessage: true,
+                categoryMessage: "negative",
             });
+        } else {
+            if (
+                this.props.postsReducer.status === 200 &&
+                !this.state.isloaded
+            ) {
+                this.setState({
+                    isloaded: true,
+                });
+            }
         }
     }
 
@@ -54,7 +79,16 @@ class PostsListPage extends React.Component<PostsListPageType> {
         return (
             <>
                 <Loader isActive={!this.state.isloaded} />
+
                 <div className="ui relaxed divided list">
+                    <Message
+                        showMessage={this.state.showMessage}
+                        category={this.state.categoryMessage}
+                        headerText={this.state.headerMessageText}
+                        text={this.state.messageText}
+                        color="red"
+                        size="large"
+                    />
                     {this.renderList()}
                 </div>
             </>
