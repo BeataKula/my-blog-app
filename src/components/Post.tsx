@@ -1,15 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { IPost } from "../AppTypes";
 import Button from "./Button";
 
-export type PostType = {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-};
-
-type PostProps = PostType;
+type PostProps = IPost;
 
 const addComment = () => {
     alert("Dodawanie komenarzy już wkrótce!");

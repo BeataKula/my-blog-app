@@ -33,16 +33,6 @@ export type MessageProps = {
     size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
 };
 
-export interface PostsListPageType {
-    fetchPosts: FetchPostType;
-    postsReducer: {
-        posts: IPost[];
-        status: number;
-        text: string;
-        error: boolean,
-    }
-}
-
 export interface IPost {
     userId: number;
     id: number;
@@ -50,30 +40,36 @@ export interface IPost {
     body: string;
 }
 
-export type PostType = {
-    PostType: IPost;
-};
-
-export type PostState = {
+export type PostPayload = {
     posts: IPost[],
     status: number,
     text: string;
     error: boolean,
+    headerMessageText: string,
+    messageText: string,
+    showMessage: boolean,
+    categoryMessage: categoryType,
+};
+
+export type PostState = {
+    isLoading: boolean,
+    error: boolean,
+    allList: {
+        isLoading: boolean,
+        error: boolean,
+        data: PostPayload;
+    }
 } 
 
 export type PostAction = {
     type: string;
-    payload: PostState;
+    payload: PostPayload;
 };
+
+export interface PostsListPageType {
+    fetchPosts: FetchPostType;
+    postsReducer: PostState;
+}
 
 export type DispatchType = (args: PostAction) => PostAction;
-export type FetchPostType = () => PostState;
-
-export type PostsListPageState = {
-    isloaded: boolean;
-    isError: boolean;
-    headerMessageText: String;
-    messageText: String;
-    showMessage: boolean;
-    categoryMessage: categoryType;
-};
+export type FetchPostType = () => PostPayload;

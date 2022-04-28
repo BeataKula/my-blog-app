@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import { fetchPosts } from "../actions";
-import { PostState, IPost, PostsListPageType, categoryType } from "../AppTypes";
+import { IPost, PostsListPageType, PostState } from "../AppTypes";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
@@ -21,12 +21,8 @@ export const PostsListStyle = styled.ul`
 
 class PostsListPage extends React.Component<PostsListPageType> {
     state = {
+        posts: [],
         isloaded: false,
-        isError: false,
-        headerMessageText: "",
-        messageText: "",
-        showMessage: false,
-        categoryMessage: "info" as categoryType,
     };
 
     componentDidMount() {
@@ -34,24 +30,18 @@ class PostsListPage extends React.Component<PostsListPageType> {
     }
 
     componentDidUpdate() {
-        console.log(this.props.postsReducer);
-
-        if (this.props.postsReducer.error === true && !this.state.isloaded) {
+        if (
+            !this.props.postsReducer.allList.error &&
+            !this.props.postsReducer.allList.isLoading &&
+            this.props.postsReducer.allList.data != null &&
+            !this.state.isloaded
+        ) {
             this.setState({
+                posts: this.props.postsReducer.allList.data.posts,
                 isloaded: true,
-                isError: true,
-                headerMessageText: "We're sorry we can't show you Blog!",
-                messageText:
-                    "An error occurred while loading data: " +
-                    this.props.postsReducer.text,
-                showMessage: true,
-                categoryMessage: "negative",
             });
         } else {
-            if (
-                this.props.postsReducer.status === 200 &&
-                !this.state.isloaded
-            ) {
+            if (this.props.postsReducer.allList.error && !this.state.isloaded) {
                 this.setState({
                     isloaded: true,
                 });
@@ -59,12 +49,33 @@ class PostsListPage extends React.Component<PostsListPageType> {
         }
     }
 
+    renderMessage() {
+        if (this.state.isloaded) {
+            return (
+                <Message
+                    showMessage={
+                        this.props.postsReducer.allList.data.showMessage
+                    }
+                    category={
+                        this.props.postsReducer.allList.data.categoryMessage
+                    }
+                    headerText={
+                        this.props.postsReducer.allList.data.headerMessageText
+                    }
+                    text={this.props.postsReducer.allList.data.messageText}
+                    color="red"
+                    size="large"
+                />
+            );
+        }
+    }
+
     renderList() {
-        if (!this.props.postsReducer.posts) {
+        if (this.state.posts === []) {
             return <></>;
         }
 
-        const ListOfPosts = this.props.postsReducer.posts.map((post: IPost) => {
+        const ListOfPosts = this.state.posts.map((post: IPost) => {
             return <Post key={post["id"]} {...post} />;
         });
 
@@ -79,16 +90,8 @@ class PostsListPage extends React.Component<PostsListPageType> {
         return (
             <>
                 <Loader isActive={!this.state.isloaded} />
-
                 <div className="ui relaxed divided list">
-                    <Message
-                        showMessage={this.state.showMessage}
-                        category={this.state.categoryMessage}
-                        headerText={this.state.headerMessageText}
-                        text={this.state.messageText}
-                        color="red"
-                        size="large"
-                    />
+                    {this.renderMessage()}
                     {this.renderList()}
                 </div>
             </>
