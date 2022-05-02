@@ -114,4 +114,4 @@ export interface UserComponentType {
 }
 
 export type DispatchUserType = (args: PostUserAction) => PostUserAction;
-export type FetchUserType = () => UserPayload;
+export type FetchUserType = (args: number) => UserPayload;

@@ -26,29 +26,29 @@ class User extends React.Component<
     };
 
     componentDidMount() {
-        console.log("componentDidMount");
-        console.log("____________________ fetchUserById _______________");
-        console.log(this.props.userId);
         this.props.fetchUserById(this.props.userId);
-        console.log("____________________ fetchUserById END _______________");
-        console.log(this.props);
-        console.log(this.state);
     }
 
     componentDidUpdate() {
-        console.log("componentDidUpdate");
-        console.log(this.props);
-        console.log(this.state.user);
-        if (!this.state.isloaded) {
+        if (
+            !this.props.userReducer.userById.error &&
+            !this.props.userReducer.userById.isLoading &&
+            this.props.userReducer.userById.data != null &&
+            !this.state.isloaded
+        ) {
+            const user = this.props.userReducer.userById.data.user;
+
+            console.log(this.props.userId);
+
             this.setState({
                 user: {
-                    id: this.props.userId,
-                    name: "",
-                    username: "",
-                    email: "",
+                    id: user.id,
+                    name: user.name,
+                    username: user.username,
+                    email: user.email,
                     address: {},
-                    phone: "",
-                    website: "",
+                    phone: user.phone,
+                    website: user.website,
                     company: {},
                 },
                 isloaded: true,
@@ -63,12 +63,11 @@ class User extends React.Component<
     }
 
     render() {
-        //console.log(this.props);
+        console.log(this.state.user.id);
+
         return (
             <>
-                <span>User Id: {this.state.user.id}</span>
-                <span>User name: {this.state.user.name}</span>
-                <span>User phone: {this.state.user.phone}</span>
+                <span>{this.state.user.name}</span>
             </>
         );
     }

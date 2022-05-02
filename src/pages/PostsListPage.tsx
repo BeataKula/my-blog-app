@@ -83,11 +83,10 @@ class PostsListPage extends React.Component<PostsListPageType> {
 
         const ListOfPosts = this.state.posts.map((post: IPost) => {
             const userId: number = post["userId"];
-            //console.log("userId: " + userId);
+            console.log("userId: " + userId);
 
             return (
                 <>
-                    <User key={`${post["id"]}_${userId}`} userId={userId} />
                     <Post key={post["id"]} {...post} />
                 </>
             );

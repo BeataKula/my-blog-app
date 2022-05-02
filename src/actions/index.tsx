@@ -75,7 +75,6 @@ export const fetchPosts: any = () => async (dispatch: DispatchType) => {
 
 export const fetchUserById: any =
     (id: number) => async (dispatch: DispatchUserType) => {
-        console.log("GET_USERS_BY_ID_REQUEST");
         let payload: UserPayload;
 
         payload = {
@@ -99,12 +98,8 @@ export const fetchUserById: any =
         });
 
         try {
-            console.log("GET_USERS_BY_ID_SUCCESS");
             let isError = true;
             const response = await getUserById(id);
-
-            console.log("fetchUserById - response: ");
-            console.log(response);
 
             if (response.status === 200) {
                 isError = false;
@@ -114,12 +109,12 @@ export const fetchUserById: any =
                 user: {
                     id: id,
                     name: response.data.name,
-                    username: "",
-                    email: "",
+                    username: response.data.username,
+                    email: response.data.email,
                     address: {},
-                    phone: "",
+                    phone: response.data.phone,
                     website: "",
-                    company: {},
+                    company: response.data.website,
                 },
                 status: response.status,
                 error: isError,
@@ -127,7 +122,6 @@ export const fetchUserById: any =
 
             dispatch({ type: GET_USERS_BY_ID_SUCCESS, payload: payload });
         } catch (error: any) {
-            console.log("GET_USERS_BY_ID_FAIL");
             dispatch({ type: GET_USERS_BY_ID_FAIL, payload: payload });
         }
     };
