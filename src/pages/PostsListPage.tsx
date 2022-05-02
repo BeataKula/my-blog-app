@@ -8,6 +8,7 @@ import { IPost, PostsListPageType, PostState } from "../AppTypes";
 import Post from "../components/Post";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
+import User from "../components/User";
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -31,17 +32,20 @@ class PostsListPage extends React.Component<PostsListPageType> {
 
     componentDidUpdate() {
         if (
-            !this.props.postsReducer.allList.error &&
-            !this.props.postsReducer.allList.isLoading &&
-            this.props.postsReducer.allList.data != null &&
+            !this.props.postsReducer.allPostsList.error &&
+            !this.props.postsReducer.allPostsList.isLoading &&
+            this.props.postsReducer.allPostsList.data != null &&
             !this.state.isloaded
         ) {
             this.setState({
-                posts: this.props.postsReducer.allList.data.posts,
+                posts: this.props.postsReducer.allPostsList.data.posts,
                 isloaded: true,
             });
         } else {
-            if (this.props.postsReducer.allList.error && !this.state.isloaded) {
+            if (
+                this.props.postsReducer.allPostsList.error &&
+                !this.state.isloaded
+            ) {
                 this.setState({
                     isloaded: true,
                 });
@@ -54,15 +58,17 @@ class PostsListPage extends React.Component<PostsListPageType> {
             return (
                 <Message
                     showMessage={
-                        this.props.postsReducer.allList.data.showMessage
+                        this.props.postsReducer.allPostsList.data.showMessage
                     }
                     category={
-                        this.props.postsReducer.allList.data.categoryMessage
+                        this.props.postsReducer.allPostsList.data
+                            .categoryMessage
                     }
                     headerText={
-                        this.props.postsReducer.allList.data.headerMessageText
+                        this.props.postsReducer.allPostsList.data
+                            .headerMessageText
                     }
-                    text={this.props.postsReducer.allList.data.messageText}
+                    text={this.props.postsReducer.allPostsList.data.messageText}
                     color="red"
                     size="large"
                 />
@@ -76,7 +82,15 @@ class PostsListPage extends React.Component<PostsListPageType> {
         }
 
         const ListOfPosts = this.state.posts.map((post: IPost) => {
-            return <Post key={post["id"]} {...post} />;
+            const userId: number = post["userId"];
+            //console.log("userId: " + userId);
+
+            return (
+                <>
+                    <User key={`${post["id"]}_${userId}`} userId={userId} />
+                    <Post key={post["id"]} {...post} />
+                </>
+            );
         });
 
         return (
