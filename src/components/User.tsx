@@ -28,7 +28,8 @@ class User extends React.Component<
     componentDidMount() {
         console.log("componentDidMount");
         console.log("____________________ fetchUserById _______________");
-        fetchUserById(this.props.userId);
+        console.log(this.props.userId);
+        this.props.fetchUserById(this.props.userId);
         console.log("____________________ fetchUserById END _______________");
         console.log(this.props);
         console.log(this.state);

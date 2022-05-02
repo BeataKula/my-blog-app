@@ -109,8 +109,8 @@ export type UserState = {
 export interface UserComponentType {
     key: string;
     userId: number,
-    fetchUser?: FetchUserType;
-    userReducer?: UserState;
+    fetchUserById: FetchUserType;
+    userReducer: UserState;
 }
 
 export type DispatchUserType = (args: PostUserAction) => PostUserAction;
