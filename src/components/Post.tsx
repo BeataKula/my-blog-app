@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { IPost } from "../AppTypes";
 import Button from "./Button";
+import User from "./User";
 
 type PostProps = IPost;
 
@@ -49,10 +50,14 @@ const Post: React.FunctionComponent<PostProps> = ({
     body,
 }) => {
     const buttonId = "button-" + id.toString();
+
+    //console.log("Posts - userId: " + userId);
     return (
         <li>
             <PostElementStyle>
-                <PostAuthor> Autor: {userId}</PostAuthor>
+                <PostAuthor>
+                    Autor: <User key={`${id}_${userId}`} userId={userId} />
+                </PostAuthor>
                 <PostTitle>
                     <b>{title}</b>
                 </PostTitle>

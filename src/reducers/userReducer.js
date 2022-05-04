@@ -1,10 +1,10 @@
 import {
-    GET_POSTS_REQUEST,
-    GET_POSTS_SUCCESS,
-    GET_POSTS_FAIL,
+    GET_USERS_BY_ID_REQUEST,
+    GET_USERS_BY_ID_SUCCESS,
+    GET_USERS_BY_ID_FAIL,
 } from "../actions/actionsTypes";
 
-const postsReducer = (
+const userReducer = (
     state = {
         isLoading: null,
         error: null,
@@ -13,28 +13,28 @@ const postsReducer = (
     action
 ) => {
     switch (action.type) {
-        case GET_POSTS_REQUEST:
+        case GET_USERS_BY_ID_REQUEST:
             return {
                 ...state,
-                allPostsList: {
+                userById: {
                     isLoading: true,
                     error: null,
                     data: null,
                 },
             };
-        case GET_POSTS_SUCCESS:
+        case GET_USERS_BY_ID_SUCCESS:
             return {
                 ...state,
-                allPostsList: {
+                userById: {
                     isLoading: false,
                     error: false,
                     data: action.payload,
                 },
             };
-        case GET_POSTS_FAIL:
+        case GET_USERS_BY_ID_FAIL:
             return {
                 ...state,
-                allPostsList: {
+                userById: {
                     isLoading: false,
                     error: true,
                     data: action.payload,
@@ -45,4 +45,4 @@ const postsReducer = (
     }
 };
 
-export default postsReducer;
+export default userReducer;

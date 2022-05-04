@@ -8,7 +8,11 @@ const createConnection = () => {
 };
 
 export const getPosts: any = async () => {
-    return await axios.get(JSON_PLACEHOLDER_BASE_URL + '/posts');
+    return await axios.get(`${JSON_PLACEHOLDER_BASE_URL}/posts`);
+};
+
+export const getUserById: any = async (id:number) => {
+    return await axios.get(`${JSON_PLACEHOLDER_BASE_URL}/users/${id}`);
 };
 
 export default createConnection;
