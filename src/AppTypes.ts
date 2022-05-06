@@ -54,7 +54,7 @@ export type PostPayload = {
 export type PostState = {
     isLoading: boolean,
     error: boolean,
-    allList: {
+    allPostsList: {
         isLoading: boolean,
         error: boolean,
         data: PostPayload;
@@ -70,6 +70,53 @@ export interface PostsListPageType {
     fetchPosts: FetchPostType;
     postsReducer: PostState;
 }
+export interface PostsListAndUsersPageType {
+    fetchPostsAndUsers: fetchPostsAndUsersType;
+    postsReducer: PostState;
+}
 
 export type DispatchType = (args: PostAction) => PostAction;
 export type FetchPostType = () => PostPayload;
+export type fetchPostsAndUsersType = () => PostPayload;
+
+export interface IUser {
+    "id": number,
+    "name": string,
+    "username": string,
+    "email": string,
+    "address": {}
+    "phone": string,
+    "website": string,
+    "company": {}
+}
+
+export type UserPayload = {
+    user: IUser,
+    status: number,
+    error:boolean
+};
+
+export type PostUserAction = {
+    type: string;
+    payload: UserPayload;
+};
+
+export type UserState = {
+    isLoading: boolean,
+    error: boolean,
+    userById: {
+        isLoading: boolean,
+        error: boolean,
+        data: UserPayload;
+    }
+}
+
+export interface UserComponentType {
+    key: string;
+    userId: number,
+    fetchUserById: FetchUserType;
+    userReducer: UserState;
+}
+
+export type DispatchUserType = (args: PostUserAction) => PostUserAction;
+export type FetchUserType = (args: number) => UserPayload;
