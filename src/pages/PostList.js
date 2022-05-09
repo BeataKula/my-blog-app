@@ -20,9 +20,7 @@ class PostList extends React.Component {
     }
 
     renderList() {
-        //TODO - tak nie działa
-        //const ListOfPosts = this.props.postsReducer.map((post) => {
-        const ListOfPosts = this.props.posts.map((post) => {
+        const ListOfPosts = this.props.postsReducer.map((post) => {
             return <Post key={post.id} {...post} />;
         });
 
@@ -42,9 +40,7 @@ class PostList extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        //TODO - tak nie działa
-        //postsReducer: state.postsReducer,
-        posts: state.posts,
+        postsReducer: state.postsReducer,
         users: state.users,
     };
 };

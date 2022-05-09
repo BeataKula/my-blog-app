@@ -18,8 +18,8 @@ const mapStateToProps = (state, ownProps) => {
     //console.log(state);
     //console.log(ownProps);
 
-    if (state.users !== undefined) {
-        user = state.users.find((user) => user.id === ownProps.userId);
+    if (state.usersReducer !== undefined) {
+        user = state.usersReducer.find((user) => user.id === ownProps.userId);
     }
     return { user };
 };
