@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import { fetchPostsAndUsers } from "../actions";
 import Post from "../components/Post";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 export const PostsListStyle = styled.ul`
     padding: 15px;
@@ -44,6 +46,27 @@ class PostList extends React.Component {
         }
     }
 
+    renderMessage() {
+        if (this.state.isloaded) {
+            return (
+                <Message
+                    showMessage={
+                        this.props.postsReducer.allList.data.showMessage
+                    }
+                    category={
+                        this.props.postsReducer.allList.data.categoryMessage
+                    }
+                    headerText={
+                        this.props.postsReducer.allList.data.headerMessageText
+                    }
+                    text={this.props.postsReducer.allList.data.messageText}
+                    color="red"
+                    size="large"
+                />
+            );
+        }
+    }
+
     renderList() {
         if (this.state.posts === []) {
             return <></>;
@@ -63,7 +86,9 @@ class PostList extends React.Component {
     render() {
         return (
             <>
+                <Loader isActive={!this.state.isloaded} />
                 <div className="ui relaxed divided list">
+                    {this.renderMessage()}
                     {this.renderList()}
                 </div>
             </>
