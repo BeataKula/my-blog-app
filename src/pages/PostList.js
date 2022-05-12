@@ -15,13 +15,44 @@ export const PostsListStyle = styled.ul`
 `;
 
 class PostList extends React.Component {
+    state = {
+        posts: [],
+        isloaded: false,
+    };
+
     componentDidMount() {
         this.props.fetchPostsAndUsers();
     }
 
+    componentDidUpdate() {
+        if (
+            !this.props.postsReducer.allList.error &&
+            !this.props.postsReducer.allList.isLoading &&
+            this.props.postsReducer.allList.data != null &&
+            !this.state.isloaded
+        ) {
+            console.log("if");
+            this.setState({
+                posts: this.props.postsReducer.allList.data,
+                isloaded: true,
+            });
+        } else {
+            console.log("else");
+            if (this.props.postsReducer.allList.error && !this.state.isloaded) {
+                this.setState({
+                    isloaded: true,
+                });
+            }
+        }
+    }
+
     renderList() {
-        const ListOfPosts = this.props.postsReducer.map((post) => {
-            return <Post key={post.id} {...post} />;
+        if (this.state.posts === []) {
+            return <></>;
+        }
+
+        const ListOfPosts = this.state.posts.map((post) => {
+            return <Post key={post["id"]} {...post} />;
         });
 
         return (
@@ -33,7 +64,11 @@ class PostList extends React.Component {
 
     render() {
         return (
-            <div className="ui relaxed divided list">{this.renderList()}</div>
+            <>
+                <div className="ui relaxed divided list">
+                    {this.renderList()}
+                </div>
+            </>
         );
     }
 }
