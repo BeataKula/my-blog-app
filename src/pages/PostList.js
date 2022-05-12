@@ -31,13 +31,11 @@ class PostList extends React.Component {
             this.props.postsReducer.allList.data != null &&
             !this.state.isloaded
         ) {
-            console.log("if");
             this.setState({
                 posts: this.props.postsReducer.allList.data,
                 isloaded: true,
             });
         } else {
-            console.log("else");
             if (this.props.postsReducer.allList.error && !this.state.isloaded) {
                 this.setState({
                     isloaded: true,
