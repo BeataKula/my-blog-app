@@ -72,6 +72,12 @@ class PostList extends React.Component {
             return <></>;
         }
 
+        //console.log("renderList/ state and props");
+        //console.log("state");
+        //console.log(this.state);
+        //console.log("props");
+        //console.log(this.props);
+
         const ListOfPosts = this.state.posts.map((post) => {
             return <Post key={post["id"]} {...post} />;
         });
@@ -97,6 +103,11 @@ class PostList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    //console.log("renderList/ state and props");
+    //console.log(state);
+    //console.log(state.postsReducer);
+    //console.log(state.users);
+
     return {
         postsReducer: state.postsReducer,
         users: state.users,

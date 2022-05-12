@@ -1,6 +1,9 @@
 import UserHeader from "./UserHeader";
 import Button from "./Button";
 import styled from "styled-components";
+import { IPost } from "../AppTypes";
+
+type PostProps = IPost;
 
 const addComment = () => {
     alert("Dodawanie komenarzy już wkrótce!");
@@ -39,7 +42,12 @@ export const PostTitle = styled.h4`
     font-weight: bold;
 `;
 
-const Post = ({ id, userId, title, body }) => {
+const Post: React.FunctionComponent<PostProps> = ({
+    id,
+    userId,
+    title,
+    body,
+}) => {
     const buttonId = "button-" + id.toString();
 
     return (

@@ -54,7 +54,7 @@ export type PostPayload = {
 export type PostState = {
     isLoading: boolean,
     error: boolean,
-    allPostsList: {
+    allList: {
         isLoading: boolean,
         error: boolean,
         data: PostPayload;
@@ -73,6 +73,7 @@ export interface PostsListPageType {
 export interface PostsListAndUsersPageType {
     fetchPostsAndUsers: fetchPostsAndUsersType;
     postsReducer: PostState;
+    userReducer: UserState;
 }
 
 export type DispatchType = (args: PostAction) => PostAction;

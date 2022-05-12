@@ -3,6 +3,7 @@ import {
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
 } from "../actions/actionsTypes";
+import { PostAction } from "../AppTypes";
 
 export default (
     state = {
@@ -10,7 +11,7 @@ export default (
         error: null,
         data: null,
     },
-    action
+    action: PostAction
 ) => {
     switch (action.type) {
         case GET_POSTS_REQUEST:
