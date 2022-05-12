@@ -104,11 +104,12 @@ export type PostUserAction = {
 export type UserState = {
     isLoading: boolean,
     error: boolean,
-    userById: {
-        isLoading: boolean,
-        error: boolean,
-        data: UserPayload;
-    }
+    userById: UserByIdResponce
+}
+export type UserByIdResponce  = {
+    isLoading: boolean,
+    error: boolean,
+    data: UserPayload;
 }
 
 export interface UserComponentType {

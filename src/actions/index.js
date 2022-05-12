@@ -20,5 +20,5 @@ export const fetchPosts = () => async (dispatch) => {
 export const fetchUser = (id) => async (dispatch) => {
     const response = await getUserById(id);
 
-    dispatch({ type: "FETCH_USER", payload: response.data });
+    dispatch({ type: "GET_USERS_BY_ID_SUCCESS", payload: response.data });
 };
