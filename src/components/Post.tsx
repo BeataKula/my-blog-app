@@ -1,9 +1,7 @@
 import UserHeader from "./UserHeader";
 import Button from "./Button";
 import styled from "styled-components";
-import { IPost } from "../AppTypes";
-
-type PostProps = IPost;
+import { PostProps } from "../AppTypes";
 
 const addComment = () => {
     alert("Dodawanie komenarzy już wkrótce!");

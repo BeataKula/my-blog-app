@@ -27,18 +27,19 @@ class PostList extends React.Component {
     }
 
     componentDidUpdate() {
+        const allList = this.props.postsReducer.allList;
         if (
-            !this.props.postsReducer.allList.error &&
-            !this.props.postsReducer.allList.isLoading &&
-            this.props.postsReducer.allList.data != null &&
+            !allList.error &&
+            !allList.isLoading &&
+            allList.data != null &&
             !this.state.isloaded
         ) {
             this.setState({
-                posts: this.props.postsReducer.allList.data,
+                posts: allList.data,
                 isloaded: true,
             });
         } else {
-            if (this.props.postsReducer.allList.error && !this.state.isloaded) {
+            if (allList.error && !this.state.isloaded) {
                 this.setState({
                     isloaded: true,
                 });
@@ -48,18 +49,13 @@ class PostList extends React.Component {
 
     renderMessage() {
         if (this.state.isloaded) {
+            const allList = this.props.postsReducer.allList;
             return (
                 <Message
-                    showMessage={
-                        this.props.postsReducer.allList.data.showMessage
-                    }
-                    category={
-                        this.props.postsReducer.allList.data.categoryMessage
-                    }
-                    headerText={
-                        this.props.postsReducer.allList.data.headerMessageText
-                    }
-                    text={this.props.postsReducer.allList.data.messageText}
+                    showMessage={allList.data.showMessage}
+                    category={allList.data.categoryMessage}
+                    headerText={allList.data.headerMessageText}
+                    text={allList.data.messageText}
                     color="red"
                     size="large"
                 />
@@ -71,12 +67,6 @@ class PostList extends React.Component {
         if (this.state.posts === []) {
             return <></>;
         }
-
-        //console.log("renderList/ state and props");
-        //console.log("state");
-        //console.log(this.state);
-        //console.log("props");
-        //console.log(this.props);
 
         const ListOfPosts = this.state.posts.map((post) => {
             return <Post key={post["id"]} {...post} />;
@@ -103,11 +93,6 @@ class PostList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    //console.log("renderList/ state and props");
-    //console.log(state);
-    //console.log(state.postsReducer);
-    //console.log(state.users);
-
     return {
         postsReducer: state.postsReducer,
         users: state.users,

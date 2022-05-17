@@ -33,7 +33,7 @@ export type MessageProps = {
     size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
 };
 
-export interface IPost {
+export interface PostProps {
     userId: number;
     id: number;
     title: string;
@@ -41,7 +41,7 @@ export interface IPost {
 }
 
 export type PostPayload = {
-    posts: IPost[],
+    posts: PostProps[],
     status: number,
     text: string;
     error: boolean,
