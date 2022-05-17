@@ -95,7 +95,7 @@ class PostList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         postsReducer: state.postsReducer,
-        users: state.users,
+        usersReducer: state.usersReducer,
     };
 };
 

@@ -6,8 +6,6 @@ import {
 
 import _ from "lodash";
 import { getPosts, getUserById } from "../apis/jsonPlaceholder";
-//TODO
-import { categoryType, DispatchType, PostPayload } from "../AppTypes";
 
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
     await dispatch(fetchPosts());

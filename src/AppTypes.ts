@@ -17,11 +17,6 @@ export type LinkProps = {
     children: string;
 };
 
-export type LinkPropsWithoutClassName = {
-    to: string;
-    children: string;
-};
-
 export type categoryType = "info" | "positive" | "negative" | "warning";
 
 export type MessageProps = {
@@ -66,21 +61,7 @@ export type PostAction = {
     payload: PostPayload;
 };
 
-export interface PostsListPageType {
-    fetchPosts: FetchPostType;
-    postsReducer: PostState;
-}
-export interface PostsListAndUsersPageType {
-    fetchPostsAndUsers: fetchPostsAndUsersType;
-    postsReducer: PostState;
-    userReducer: UserState;
-}
-
-export type DispatchType = (args: PostAction) => PostAction;
-export type FetchPostType = () => PostPayload;
-export type fetchPostsAndUsersType = () => PostPayload;
-
-export interface IUser {
+export interface User {
     "id": number,
     "name": string,
     "username": string,
@@ -92,33 +73,30 @@ export interface IUser {
 }
 
 export type UserPayload = {
-    user: IUser,
+    user: User,
     status: number,
     error:boolean
 };
 
-export type PostUserAction = {
+export type UserAction = {
     type: string;
     payload: UserPayload;
 };
 
-export type UserState = {
-    isLoading: boolean,
-    error: boolean,
-    userById: UserByIdResponce
-}
 export type UserByIdResponce  = {
     isLoading: boolean,
     error: boolean,
-    data: UserPayload;
+    data: User;
 }
 
-export interface UserComponentType {
-    key: string;
-    userId: number,
-    fetchUserById: FetchUserType;
-    userReducer: UserState;
+export interface UserHeaderType {
+    dispatch?: DispatchUserType;
+    postsReducer: PostState;
+    usersReducer: [];
+    user: {
+        userById: UserByIdResponce
+    };
+    userId: number;
 }
 
-export type DispatchUserType = (args: PostUserAction) => PostUserAction;
-export type FetchUserType = (args: number) => UserPayload;
+export type DispatchUserType = (args: UserAction) => UserAction;

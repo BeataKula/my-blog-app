@@ -3,9 +3,9 @@ import {
     GET_USERS_BY_ID_SUCCESS,
     GET_USERS_BY_ID_FAIL,
 } from "../actions/actionsTypes";
-import { PostUserAction } from "../AppTypes";
+import { UserAction } from "../AppTypes";
 
-export default (state = [], action: PostUserAction) => {
+export default (state = [], action: UserAction) => {
     switch (action.type) {
         case GET_USERS_BY_ID_REQUEST:
             return [
@@ -14,7 +14,7 @@ export default (state = [], action: PostUserAction) => {
                     userById: {
                         isLoading: true,
                         error: true,
-                        data: true,
+                        data: {},
                     },
                 },
             ];

@@ -48,11 +48,28 @@ const Post: React.FunctionComponent<PostProps> = ({
 }) => {
     const buttonId = "button-" + id.toString();
 
+    let user = {
+        userById: {
+            isLoading: false,
+            error: false,
+            data: {
+                id: 0,
+                name: "",
+                username: "",
+                email: "",
+                address: {},
+                phone: "",
+                website: "",
+                company: {},
+            },
+        },
+    };
+
     return (
         <li>
             <PostElementStyle>
                 <PostAuthor>
-                    <UserHeader userId={userId} />
+                    <UserHeader user={user} userId={userId} />
                 </PostAuthor>
                 <PostTitle>
                     <b>{title}</b>

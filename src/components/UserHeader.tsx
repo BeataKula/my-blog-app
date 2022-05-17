@@ -1,9 +1,10 @@
-import { isArray } from "lodash";
 import React from "react";
 import { connect } from "react-redux";
-import { UserByIdResponce } from "../AppTypes";
+import { PostState, UserByIdResponce, UserHeaderType } from "../AppTypes";
 
-class UserHeader extends React.Component {
+//TODO add type
+//class UserHeader extends React.Component<UserHeaderType> {
+class UserHeader extends React.Component<any> {
     render() {
         if (
             this.props.user !== undefined &&
@@ -18,11 +19,24 @@ class UserHeader extends React.Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (
+    state: {
+        postsReducer: PostState;
+        usersReducer: [];
+    },
+    props: {
+        userId: number;
+        user: {
+            userById: UserByIdResponce;
+        };
+    }
+) => {
     let user = null;
+    let postsReducer = state.postsReducer;
+    let usersReducer = state.usersReducer;
 
-    function checkId(user) {
-        if (user.userById.data.id === ownProps.userId) {
+    function checkId(user: { userById: UserByIdResponce }) {
+        if (user.userById.data.id === props.userId) {
             return user;
         }
     }
@@ -30,7 +44,7 @@ const mapStateToProps = (state, ownProps) => {
     if (state.usersReducer !== undefined) {
         user = state.usersReducer.find(checkId);
     }
-    return { user };
+    return { user, postsReducer, usersReducer };
 };
 
 export default connect(mapStateToProps)(UserHeader);
