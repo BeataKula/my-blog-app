@@ -17,11 +17,6 @@ export type LinkProps = {
     children: string;
 };
 
-export type LinkPropsWithoutClassName = {
-    to: string;
-    children: string;
-};
-
 export type categoryType = "info" | "positive" | "negative" | "warning";
 
 export type MessageProps = {
@@ -33,44 +28,75 @@ export type MessageProps = {
     size: "mini" | "tiny" | "small" | "large" | "big" | "huge" | "massive";
 };
 
-export interface PostsListPageType {
-    fetchPosts: FetchPostType;
-    postsReducer: {
-        posts: IPost[];
-        status: number;
-    }
-}
-
-export interface IPost {
+export interface PostProps {
     userId: number;
     id: number;
     title: string;
     body: string;
 }
 
-export type PostType = {
-    PostType: IPost;
+export type PostPayload = {
+    posts: PostProps[],
+    status: number,
+    text: string;
+    error: boolean,
+    headerMessageText: string,
+    messageText: string,
+    showMessage: boolean,
+    categoryMessage: categoryType,
 };
 
 export type PostState = {
-    posts: IPost[],
-    status: number
+    isLoading: boolean,
+    error: boolean,
+    allList: {
+        isLoading: boolean,
+        error: boolean,
+        data: PostPayload;
+    }
 } 
 
 export type PostAction = {
     type: string;
-    payload: PostState;
+    payload: PostPayload;
 };
 
-export type DispatchType = (args: PostAction) => PostAction;
-export type FetchPostType = () => PostState;
+export interface User {
+    "id": number,
+    "name": string,
+    "username": string,
+    "email": string,
+    "address": {}
+    "phone": string,
+    "website": string,
+    "company": {}
+}
 
-export type PostsListPageState = {
-    posts: IPost[];
-    isloaded: boolean;
-    isError: boolean;
-    headerMessageText: String;
-    messageText: String;
-    showMessage: boolean;
-    categoryMessage: categoryType;
+export type UserPayload = {
+    user: User,
+    status: number,
+    error:boolean
 };
+
+export type UserAction = {
+    type: string;
+    payload: UserPayload;
+};
+
+export type UserByIdResponce  = {
+    isLoading: boolean,
+    error: boolean,
+    data: User;
+}
+
+export interface UserHeaderType {
+    dispatch?: DispatchUserType;
+    postsReducer: PostState;
+    usersReducer: [];
+    user: {
+        userById: UserByIdResponce
+    };
+    userId: number;
+}
+
+export type DispatchUserType = (args: UserAction) => UserAction;

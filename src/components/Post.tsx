@@ -1,15 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import UserHeader from "./UserHeader";
 import Button from "./Button";
-
-export type PostType = {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-};
-
-type PostProps = PostType;
+import styled from "styled-components";
+import { PostProps } from "../AppTypes";
 
 const addComment = () => {
     alert("Dodawanie komenarzy już wkrótce!");
@@ -55,10 +47,30 @@ const Post: React.FunctionComponent<PostProps> = ({
     body,
 }) => {
     const buttonId = "button-" + id.toString();
+
+    let user = {
+        userById: {
+            isLoading: false,
+            error: false,
+            data: {
+                id: 0,
+                name: "",
+                username: "",
+                email: "",
+                address: {},
+                phone: "",
+                website: "",
+                company: {},
+            },
+        },
+    };
+
     return (
         <li>
             <PostElementStyle>
-                <PostAuthor> Autor: {userId}</PostAuthor>
+                <PostAuthor>
+                    <UserHeader user={user} userId={userId} />
+                </PostAuthor>
                 <PostTitle>
                     <b>{title}</b>
                 </PostTitle>
